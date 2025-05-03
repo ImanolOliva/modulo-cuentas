@@ -99,7 +99,7 @@ public class ModuloCuentasApplication {
 
 			UserEntity userAnyi = UserEntity.builder()
 					.username("anyi")
-					.password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
+					.password("")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
