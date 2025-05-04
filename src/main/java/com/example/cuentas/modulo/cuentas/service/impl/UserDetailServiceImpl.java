@@ -1,7 +1,8 @@
-package com.example.cuentas.modulo.cuentas.service;
+package com.example.cuentas.modulo.cuentas.service.impl;
 
 import com.example.cuentas.modulo.cuentas.persistence.entity.UserEntity;
 import com.example.cuentas.modulo.cuentas.persistence.entity.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired

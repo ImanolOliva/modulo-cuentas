@@ -69,7 +69,7 @@ public class ModuloCuentasApplication {
 			/* CREATE USERS */
 			UserEntity userImanol = UserEntity.builder()
 					.username("imanol")
-					.password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
+					.password("1234")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
@@ -79,7 +79,7 @@ public class ModuloCuentasApplication {
 
 			UserEntity userAldana = UserEntity.builder()
 					.username("aldana")
-					.password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
+					.password("1234")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
@@ -89,7 +89,7 @@ public class ModuloCuentasApplication {
 
 			UserEntity userAta = UserEntity.builder()
 					.username("ata")
-					.password("$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6")
+					.password("1234")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
@@ -99,7 +99,7 @@ public class ModuloCuentasApplication {
 
 			UserEntity userAnyi = UserEntity.builder()
 					.username("anyi")
-					.password("")
+					.password("1234")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)

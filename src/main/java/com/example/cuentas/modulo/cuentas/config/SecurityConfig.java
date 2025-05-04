@@ -1,6 +1,6 @@
 package com.example.cuentas.modulo.cuentas.config;
 
-import com.example.cuentas.modulo.cuentas.service.UserDetailServiceImpl;
+import com.example.cuentas.modulo.cuentas.service.impl.UserDetailServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -30,19 +31,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .csrf(csrf -> csrf.ignoringRequestMatchers(PathRequest.toH2Console()))
-                .headers(headers -> headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // Configurar los endpoints publicos
-                    http.requestMatchers(HttpMethod.GET, "/auth/get").permitAll();
+                            http.requestMatchers(HttpMethod.GET, "/auth/login").permitAll();
                     http.requestMatchers(PathRequest.toH2Console()).permitAll();
                     // Cofnigurar los endpoints privados
-                    http.requestMatchers(HttpMethod.POST, "/auth/post").hasAnyRole("ADMIN", "DEVELOPER");
-                    http.requestMatchers(HttpMethod.PATCH, "/auth/patch").hasAnyAuthority("REFACTOR");
+                    http.requestMatchers(HttpMethod.POST, "/account/create").hasAnyRole("ADMIN", "DEVELOPER","USER");
+                    // http.requestMatchers(HttpMethod.PATCH, "/auth/patch").hasAnyAuthority("REFACTOR");
                     // Configurar el resto de endpoint - NO ESPECIFICADOS
-                    http.anyRequest().denyAll();
+                    http.anyRequest().authenticated();
                 })
                 .build();
     }
@@ -64,6 +63,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+        //return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 }

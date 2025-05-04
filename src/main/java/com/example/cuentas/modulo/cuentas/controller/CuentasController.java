@@ -1,33 +1,23 @@
 package com.example.cuentas.modulo.cuentas.controller;
-
+import com.example.cuentas.modulo.cuentas.dto.UserAccountDTO;
+import com.example.cuentas.modulo.cuentas.service.impl.UserAccountServiceImpl;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/account")
 public class CuentasController {
 
-    @GetMapping("/get")
-    public String helloGet(){
-        return "Hello World - GET";
-    }
 
-    @PostMapping("/post")
-    public String helloPost(){
-        return "Hello World - POST";
-    }
 
-    @PutMapping("/put")
-    public String helloPut(){
-        return "Hello World - PUT";
-    }
+    @Autowired
+    UserAccountServiceImpl userAccountService;
 
-    @DeleteMapping("/delete")
-    public String helloDelete(){
-        return "Hello World - DELETE";
-    }
-
-    @PatchMapping("/patch")
-    public String helloPatch(){
-        return "Hello World - PATCH";
+    @PostMapping("/create")
+    public ResponseEntity<UserAccountDTO> createUser(@Valid @RequestBody  UserAccountDTO userAccountDTO){
+            return new ResponseEntity<>(this.userAccountService.createUserAccount(userAccountDTO), HttpStatus.valueOf(200));
     }
 }
