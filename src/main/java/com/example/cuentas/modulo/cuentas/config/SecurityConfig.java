@@ -39,7 +39,6 @@ public class SecurityConfig {
                     http.requestMatchers(PathRequest.toH2Console()).permitAll();
                     // Cofnigurar los endpoints privados
                     http.requestMatchers(HttpMethod.POST, "/account/create").hasAnyRole("ADMIN", "DEVELOPER","USER");
-                    // http.requestMatchers(HttpMethod.PATCH, "/auth/patch").hasAnyAuthority("REFACTOR");
                     // Configurar el resto de endpoint - NO ESPECIFICADOS
                     http.anyRequest().authenticated();
                 })
@@ -63,7 +62,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        //return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
+
     }
 }

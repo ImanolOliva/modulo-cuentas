@@ -4,25 +4,30 @@ package com.example.cuentas.modulo.cuentas.service.impl;
 import com.example.cuentas.modulo.cuentas.dto.UserAccountDTO;
 import com.example.cuentas.modulo.cuentas.persistence.entity.repository.UserAccountRepository;
 import com.example.cuentas.modulo.cuentas.persistence.entity.users.UserAccount;
+import com.example.cuentas.modulo.cuentas.service.UserAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class UserAccountServiceImpl {
+public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
     private UserAccountRepository userAccountRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
+    @Override
     public UserAccountDTO createUserAccount(UserAccountDTO userAccountDTO) {
         try{
             this.validaciones(userAccountDTO,userAccountRepository);
             UserAccount user = new UserAccount();
             user.setUsername(userAccountDTO.getUsername());
-            user.setPassword(userAccountDTO.getPassword());
+            user.setPassword(passwordEncoder.encode(userAccountDTO.getPassword()));
             user.setEmail(userAccountDTO.getEmail());
             user.setAge(userAccountDTO.getAge());
             UserAccount savedUser = userAccountRepository.save(user);
